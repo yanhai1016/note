@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.node.dao.NotebookTypeDao">
+	<sql id="col">
+		t_name AS name,
+		t_id AS id,
+		t_desc AS desc
+	</sql>
+
+
+	<select id="findNormal" resultType="com.yh.node.entity.NotebookType">
+		select <include refid="col"></include> from cn_notebook_type where t_name ='normal'
+	</select>
+	<select id="findSpecail" resultType="com.yh.node.entity.NotebookType">
+		select <include refid="col"></include> from cn_notebook_type where t_name !='normal'
+	</select>
+</mapper>
