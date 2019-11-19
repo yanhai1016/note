@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.yh.node.dao.UserDao">
+	<sql id="col">
+		u_name AS name,
+		u_id AS id,
+		u_password AS password,
+		u_nickname as nickname
+	</sql>
+	<select id="findByName" parameterType="string" resultType="com.yh.node.entity.User">
+		select <include refid="col"></include> from cn_user where u_name=#{name}
+	</select>
+	<select id="findById" parameterType="string" resultType="com.yh.node.entity.User">
+		select <include refid="col"></include> from cn_user where id=#{id}
+	</select>
+	<select id="findByNickname" parameterType="string" resultType="com.yh.node.entity.User">
+		select <include refid="col"></include> from cn_user where u_nickname=#{nickname}
+	</select>
+	<insert	id="add" parameterType="com.yh.node.entity.User">
+		insert into 
+		cn_user(u_id,u_name,u_password,u_nickname)
+		values(#{id},#{name},#{password},#{nickname})
+	</insert>
+	<update id="update" parameterType="com.yh.node.entity.User">
+		update cn_user set u_password=#{password} where u_id=#{id}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
