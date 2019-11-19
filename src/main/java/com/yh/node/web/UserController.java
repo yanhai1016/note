@@ -31,6 +31,17 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping("/logout")
+    public Object logout(HttpSession session){
+        session.invalidate();
+        return "登出成功";
+    }
+
+    @RequestMapping("/checkName")
+    public Object checkName(String name){
+        return service.checkName(name);
+    }
+
     @RequestMapping("/changePassword")
     public Object changePassword(String userId,String lastPassword,String newPassword,HttpSession session){
         Map<String, Object> result=new HashMap<String,Object>();

@@ -5,6 +5,7 @@ import com.yh.node.entity.User;
 import com.yh.node.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class UserService {
     @Autowired
     private UserDao dao;
 
+    @Transactional(readOnly = true)
     public Map<String,Object> login(String name,String password){
         Map<String,Object> result=new HashMap<String,Object>();
         if (name==null||name.trim().length()==0){
@@ -41,6 +43,7 @@ public class UserService {
         return result;
     }
 
+    @Transactional
     public Map<String,Object> register(String name,String nickname,String password){
         Map<String,Object> result=new HashMap<String,Object>();
         if (name==null||name.trim().length()==0){
@@ -76,6 +79,7 @@ public class UserService {
         return result;
     }
 
+    @Transactional
     public void changePassword(String userId,String newPassword){
         newPassword=Md5Util.md5(newPassword);
         newPassword=Md5Util.md5(newPassword);
@@ -83,5 +87,10 @@ public class UserService {
         user.setId(userId);
         user.setPassword(newPassword);
         dao.update(user);
+    }
+
+    @Transactional
+    public boolean checkName(String name){
+        return dao.findByName(name)==null;
     }
 }
