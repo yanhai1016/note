@@ -4,14 +4,14 @@
 	<sql id="col">
 		t_name AS name,
 		t_id AS id,
-		t_desc AS desc
+		t_desc AS tDesc
 	</sql>
 
 
 	<select id="findNormal" resultType="com.yh.node.entity.NotebookType">
 		select <include refid="col"></include> from cn_notebook_type where t_name ='normal'
 	</select>
-	<select id="findSpecail" resultType="com.yh.node.entity.NotebookType">
+	<select id="findSpecial" resultType="com.yh.node.entity.NotebookType">
 		select <include refid="col"></include> from cn_notebook_type where t_name !='normal'
 	</select>
 </mapper>

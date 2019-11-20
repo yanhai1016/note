@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface NotebookTypeDao {
     NotebookType findNormal();
-    List<NotebookType> findSpecail();
+    List<NotebookType> findSpecial();
 }

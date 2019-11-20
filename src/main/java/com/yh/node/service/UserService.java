@@ -17,6 +17,9 @@ public class UserService {
     @Autowired
     private UserDao dao;
 
+    @Autowired
+    private NotebookService notebookService;
+
     @Transactional(readOnly = true)
     public Map<String,Object> login(String name,String password){
         Map<String,Object> result=new HashMap<String,Object>();
@@ -75,6 +78,7 @@ public class UserService {
         password=Md5Util.md5(password);
         u.setPassword(password);
         dao.add(u);
+        notebookService.initSpecialNotebook(u.getId());
         result.put("success",true);
         return result;
     }
